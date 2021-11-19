@@ -1,0 +1,9 @@
+	int a_bar;
+	const int b = 25;
+	int c; 
+	int q1;	
+	int a;
+	a = 1;
+	a_bar = 40;
+	
+	

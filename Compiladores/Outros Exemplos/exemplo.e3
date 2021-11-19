@@ -1,0 +1,6 @@
+	int a_bar;
+    const int b = 30;
+    int d; 
+    
+    
+    

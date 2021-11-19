@@ -1,0 +1,19 @@
+// programa na linguagem E1 sem erros léxicos
+
+    int a_bar;
+    const int b = 25;
+    int c;
+    int q1;
+	int z;
+	
+    a_bar = 40;
+    c = b*b + a_bar;	
+	
+	z = 1;
+	z = a_bar - 30;
+	//return z;
+
+    return q1 = c / (c - z);
+	
+
+

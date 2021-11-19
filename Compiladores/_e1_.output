@@ -1,0 +1,558 @@
+State 5 conflicts: 2 shift/reduce
+
+
+Grammar
+
+    0 $accept: program $end
+
+    1 program: declaration-list compound-stmt
+
+    2 declaration-list: declaration-list declaration
+    3                 | declaration
+
+    4 declaration: var-declaration
+    5            | const-declaration
+
+    6 var-declaration: type-specifier ID ';'
+
+    7 type-specifier: INT
+    8               | VOID
+
+    9 const-declaration: CONST type-specifier ID '=' NUM ';'
+
+   10 compound-stmt: local-declarations statement-list
+
+   11 local-declarations: local-declarations var-declaration
+   12                   | %empty
+
+   13 statement-list: statement-list statement
+   14               | %empty
+
+   15 statement: expression-stmt
+   16          | return-stmt
+
+   17 expression-stmt: expression ';'
+   18                | ';'
+
+   19 return-stmt: RETURN ';'
+   20            | RETURN expression ';'
+
+   21 expression: ID '=' additive-expression
+
+   22 additive-expression: additive-expression addop term
+   23                    | term
+
+   24 addop: '+'
+   25      | '-'
+
+   26 term: term mulop factor
+   27     | factor
+
+   28 mulop: '*'
+   29      | '/'
+
+   30 factor: '(' expression ')'
+   31       | ID
+   32       | NUM
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+'(' (40) 30
+')' (41) 30
+'*' (42) 28
+'+' (43) 24
+'-' (45) 25
+'/' (47) 29
+';' (59) 6 9 17 18 19 20
+'=' (61) 9 21
+error (256)
+ID (258) 6 9 21 31
+INT (259) 7
+VOID (260) 8
+CONST (261) 9
+NUM (262) 9 32
+RETURN (263) 19 20
+
+
+Nonterminals, with rules where they appear
+
+$accept (17)
+    on left: 0
+program (18)
+    on left: 1, on right: 0
+declaration-list (19)
+    on left: 2 3, on right: 1 2
+declaration (20)
+    on left: 4 5, on right: 2 3
+var-declaration (21)
+    on left: 6, on right: 4 11
+type-specifier (22)
+    on left: 7 8, on right: 6 9
+const-declaration (23)
+    on left: 9, on right: 5
+compound-stmt (24)
+    on left: 10, on right: 1
+local-declarations (25)
+    on left: 11 12, on right: 10 11
+statement-list (26)
+    on left: 13 14, on right: 10 13
+statement (27)
+    on left: 15 16, on right: 13
+expression-stmt (28)
+    on left: 17 18, on right: 15
+return-stmt (29)
+    on left: 19 20, on right: 16
+expression (30)
+    on left: 21, on right: 17 20 30
+additive-expression (31)
+    on left: 22 23, on right: 21 22
+addop (32)
+    on left: 24 25, on right: 22
+term (33)
+    on left: 26 27, on right: 22 23 26
+mulop (34)
+    on left: 28 29, on right: 26
+factor (35)
+    on left: 30 31 32, on right: 26 27
+
+
+State 0
+
+    0 $accept: . program $end
+
+    INT    shift, and go to state 1
+    VOID   shift, and go to state 2
+    CONST  shift, and go to state 3
+
+    program            go to state 4
+    declaration-list   go to state 5
+    declaration        go to state 6
+    var-declaration    go to state 7
+    type-specifier     go to state 8
+    const-declaration  go to state 9
+
+
+State 1
+
+    7 type-specifier: INT .
+
+    $default  reduce using rule 7 (type-specifier)
+
+
+State 2
+
+    8 type-specifier: VOID .
+
+    $default  reduce using rule 8 (type-specifier)
+
+
+State 3
+
+    9 const-declaration: CONST . type-specifier ID '=' NUM ';'
+
+    INT   shift, and go to state 1
+    VOID  shift, and go to state 2
+
+    type-specifier  go to state 10
+
+
+State 4
+
+    0 $accept: program . $end
+
+    $end  shift, and go to state 11
+
+
+State 5
+
+    1 program: declaration-list . compound-stmt
+    2 declaration-list: declaration-list . declaration
+
+    INT    shift, and go to state 1
+    VOID   shift, and go to state 2
+    CONST  shift, and go to state 3
+
+    INT       [reduce using rule 12 (local-declarations)]
+    VOID      [reduce using rule 12 (local-declarations)]
+    $default  reduce using rule 12 (local-declarations)
+
+    declaration         go to state 12
+    var-declaration     go to state 7
+    type-specifier      go to state 8
+    const-declaration   go to state 9
+    compound-stmt       go to state 13
+    local-declarations  go to state 14
+
+
+State 6
+
+    3 declaration-list: declaration .
+
+    $default  reduce using rule 3 (declaration-list)
+
+
+State 7
+
+    4 declaration: var-declaration .
+
+    $default  reduce using rule 4 (declaration)
+
+
+State 8
+
+    6 var-declaration: type-specifier . ID ';'
+
+    ID  shift, and go to state 15
+
+
+State 9
+
+    5 declaration: const-declaration .
+
+    $default  reduce using rule 5 (declaration)
+
+
+State 10
+
+    9 const-declaration: CONST type-specifier . ID '=' NUM ';'
+
+    ID  shift, and go to state 16
+
+
+State 11
+
+    0 $accept: program $end .
+
+    $default  accept
+
+
+State 12
+
+    2 declaration-list: declaration-list declaration .
+
+    $default  reduce using rule 2 (declaration-list)
+
+
+State 13
+
+    1 program: declaration-list compound-stmt .
+
+    $default  reduce using rule 1 (program)
+
+
+State 14
+
+   10 compound-stmt: local-declarations . statement-list
+   11 local-declarations: local-declarations . var-declaration
+
+    INT   shift, and go to state 1
+    VOID  shift, and go to state 2
+
+    $default  reduce using rule 14 (statement-list)
+
+    var-declaration  go to state 17
+    type-specifier   go to state 8
+    statement-list   go to state 18
+
+
+State 15
+
+    6 var-declaration: type-specifier ID . ';'
+
+    ';'  shift, and go to state 19
+
+
+State 16
+
+    9 const-declaration: CONST type-specifier ID . '=' NUM ';'
+
+    '='  shift, and go to state 20
+
+
+State 17
+
+   11 local-declarations: local-declarations var-declaration .
+
+    $default  reduce using rule 11 (local-declarations)
+
+
+State 18
+
+   10 compound-stmt: local-declarations statement-list .
+   13 statement-list: statement-list . statement
+
+    ID      shift, and go to state 21
+    RETURN  shift, and go to state 22
+    ';'     shift, and go to state 23
+
+    $default  reduce using rule 10 (compound-stmt)
+
+    statement        go to state 24
+    expression-stmt  go to state 25
+    return-stmt      go to state 26
+    expression       go to state 27
+
+
+State 19
+
+    6 var-declaration: type-specifier ID ';' .
+
+    $default  reduce using rule 6 (var-declaration)
+
+
+State 20
+
+    9 const-declaration: CONST type-specifier ID '=' . NUM ';'
+
+    NUM  shift, and go to state 28
+
+
+State 21
+
+   21 expression: ID . '=' additive-expression
+
+    '='  shift, and go to state 29
+
+
+State 22
+
+   19 return-stmt: RETURN . ';'
+   20            | RETURN . expression ';'
+
+    ID   shift, and go to state 21
+    ';'  shift, and go to state 30
+
+    expression  go to state 31
+
+
+State 23
+
+   18 expression-stmt: ';' .
+
+    $default  reduce using rule 18 (expression-stmt)
+
+
+State 24
+
+   13 statement-list: statement-list statement .
+
+    $default  reduce using rule 13 (statement-list)
+
+
+State 25
+
+   15 statement: expression-stmt .
+
+    $default  reduce using rule 15 (statement)
+
+
+State 26
+
+   16 statement: return-stmt .
+
+    $default  reduce using rule 16 (statement)
+
+
+State 27
+
+   17 expression-stmt: expression . ';'
+
+    ';'  shift, and go to state 32
+
+
+State 28
+
+    9 const-declaration: CONST type-specifier ID '=' NUM . ';'
+
+    ';'  shift, and go to state 33
+
+
+State 29
+
+   21 expression: ID '=' . additive-expression
+
+    ID   shift, and go to state 34
+    NUM  shift, and go to state 35
+    '('  shift, and go to state 36
+
+    additive-expression  go to state 37
+    term                 go to state 38
+    factor               go to state 39
+
+
+State 30
+
+   19 return-stmt: RETURN ';' .
+
+    $default  reduce using rule 19 (return-stmt)
+
+
+State 31
+
+   20 return-stmt: RETURN expression . ';'
+
+    ';'  shift, and go to state 40
+
+
+State 32
+
+   17 expression-stmt: expression ';' .
+
+    $default  reduce using rule 17 (expression-stmt)
+
+
+State 33
+
+    9 const-declaration: CONST type-specifier ID '=' NUM ';' .
+
+    $default  reduce using rule 9 (const-declaration)
+
+
+State 34
+
+   31 factor: ID .
+
+    $default  reduce using rule 31 (factor)
+
+
+State 35
+
+   32 factor: NUM .
+
+    $default  reduce using rule 32 (factor)
+
+
+State 36
+
+   30 factor: '(' . expression ')'
+
+    ID  shift, and go to state 21
+
+    expression  go to state 41
+
+
+State 37
+
+   21 expression: ID '=' additive-expression .
+   22 additive-expression: additive-expression . addop term
+
+    '+'  shift, and go to state 42
+    '-'  shift, and go to state 43
+
+    $default  reduce using rule 21 (expression)
+
+    addop  go to state 44
+
+
+State 38
+
+   23 additive-expression: term .
+   26 term: term . mulop factor
+
+    '*'  shift, and go to state 45
+    '/'  shift, and go to state 46
+
+    $default  reduce using rule 23 (additive-expression)
+
+    mulop  go to state 47
+
+
+State 39
+
+   27 term: factor .
+
+    $default  reduce using rule 27 (term)
+
+
+State 40
+
+   20 return-stmt: RETURN expression ';' .
+
+    $default  reduce using rule 20 (return-stmt)
+
+
+State 41
+
+   30 factor: '(' expression . ')'
+
+    ')'  shift, and go to state 48
+
+
+State 42
+
+   24 addop: '+' .
+
+    $default  reduce using rule 24 (addop)
+
+
+State 43
+
+   25 addop: '-' .
+
+    $default  reduce using rule 25 (addop)
+
+
+State 44
+
+   22 additive-expression: additive-expression addop . term
+
+    ID   shift, and go to state 34
+    NUM  shift, and go to state 35
+    '('  shift, and go to state 36
+
+    term    go to state 49
+    factor  go to state 39
+
+
+State 45
+
+   28 mulop: '*' .
+
+    $default  reduce using rule 28 (mulop)
+
+
+State 46
+
+   29 mulop: '/' .
+
+    $default  reduce using rule 29 (mulop)
+
+
+State 47
+
+   26 term: term mulop . factor
+
+    ID   shift, and go to state 34
+    NUM  shift, and go to state 35
+    '('  shift, and go to state 36
+
+    factor  go to state 50
+
+
+State 48
+
+   30 factor: '(' expression ')' .
+
+    $default  reduce using rule 30 (factor)
+
+
+State 49
+
+   22 additive-expression: additive-expression addop term .
+   26 term: term . mulop factor
+
+    '*'  shift, and go to state 45
+    '/'  shift, and go to state 46
+
+    $default  reduce using rule 22 (additive-expression)
+
+    mulop  go to state 47
+
+
+State 50
+
+   26 term: term mulop factor .
+
+    $default  reduce using rule 26 (term)
