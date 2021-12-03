@@ -69,9 +69,9 @@ int yylex();
 /*%token return*/
 
 
-%left '+' '-'
-%left '*' '/'
-%right '('
+%left PLUS MINUS
+%left TIMES DIV
+//%right '('
 
 //%define api.value.type {int}
 
